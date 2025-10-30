@@ -1,18 +1,25 @@
 # NextJS
 
-## Form Submit in Next.js
+## Form Submission in Next.js
 
-### 1. server action
+There are two primary ways to handle form submissions with Server Actions in Next.js.
 
-src/lib/action.ts
+### 1. Using Server Actions with Server Components
 
-```ts
+This is the most direct approach. The form is rendered in a Server Component, and the `action` prop is bound directly to a Server Action. This method leverages progressive enhancement.
+
+#### `src/lib/action.ts`
+
+The server action is defined in a file with the `"use server";` directive. It accepts `FormData`.
+
+```typescript
 "use server";
 
 export const registerUser = async (formData: FormData) => {
   const { name, email, password } = Object.fromEntries(formData.entries());
 
-  console.log(name, email, password);
+  console.log("Data from Server Component form:", { name, email, password });
+  // Add your user registration logic here (e.g., database insertion)
 };
 ```
 
